@@ -15,6 +15,27 @@ const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 時
 const days = Math.round((today - start) / 86400000) + 1; // 86400000ミリ秒 = 1日
 document.getElementById("daysNum").textContent = days;
 
+// 1.6 次の記念日（毎月、付き合った日と同じ日付）
+// その月にその日がない場合（例：31日）は、月末の日を記念日にする
+function annivDate(monthsLater) {
+  const lastDay = new Date(y, m - 1 + monthsLater + 1, 0).getDate(); // 翌月の「0日」= その月の末日
+  return new Date(y, m - 1 + monthsLater, Math.min(d, lastDay));
+}
+// 「〇ヶ月」か「〇年」かの呼び方を決める
+function annivName(months) {
+  return months % 12 === 0 ? `${months / 12}年記念日` : `${months}ヶ月記念日`;
+}
+let months = 1;
+while (annivDate(months) < today) months++; // 今日以降で最初の記念日を探す
+const annivEl = document.getElementById("anniv");
+const left = Math.round((annivDate(months) - today) / 86400000);
+if (left === 0) {
+  annivEl.textContent = `🎉 今日は${annivName(months)}！`;
+  annivEl.classList.add("today");
+} else {
+  annivEl.innerHTML = `${annivName(months)}まで あと<b>${left}</b>日`;
+}
+
 // 2. 次の目標（今の%より大きい最初の目標）
 const next = GOALS.find((g) => g.percent > percent);
 document.getElementById("nextGoal").textContent = next
