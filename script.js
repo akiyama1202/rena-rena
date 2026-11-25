@@ -15,7 +15,7 @@ const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 時
 const days = Math.round((today - start) / 86400000) + 1; // 86400000ミリ秒 = 1日
 document.getElementById("daysNum").textContent = days;
 
-// 1.6 次の記念日（毎月、付き合った日と同じ日付）
+// 1.6 次の年記念日（毎年、付き合った日と同じ月日）
 // その月にその日がない場合（例：31日）は、月末の日を記念日にする
 function annivDate(monthsLater) {
   const lastDay = new Date(y, m - 1 + monthsLater + 1, 0).getDate(); // 翌月の「0日」= その月の末日
@@ -25,8 +25,8 @@ function annivDate(monthsLater) {
 function annivName(months) {
   return months % 12 === 0 ? `${months / 12}年記念日` : `${months}ヶ月記念日`;
 }
-let months = 1;
-while (annivDate(months) < today) months++; // 今日以降で最初の記念日を探す
+let months = 12; // 1年 = 12ヶ月後から探し始める
+while (annivDate(months) < today) months += 12; // 過ぎていたら次の年へ
 const annivEl = document.getElementById("anniv");
 const left = Math.round((annivDate(months) - today) / 86400000);
 if (left === 0) {
