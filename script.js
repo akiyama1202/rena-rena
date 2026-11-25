@@ -7,6 +7,14 @@ setTimeout(() => {
 }, 100);
 document.getElementById("percentText").textContent = percent + "%";
 
+// 1.5 付き合ってからの日数（付き合った日を「1日目」と数える）
+const [y, m, d] = START_DATE.split("-").map(Number);
+const start = new Date(y, m - 1, d);          // 月は0始まりなので -1
+const now = new Date();
+const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 時刻を切り捨てて日付だけに
+const days = Math.round((today - start) / 86400000) + 1; // 86400000ミリ秒 = 1日
+document.getElementById("daysNum").textContent = days;
+
 // 2. 次の目標（今の%より大きい最初の目標）
 const next = GOALS.find((g) => g.percent > percent);
 document.getElementById("nextGoal").textContent = next

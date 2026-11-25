@@ -160,3 +160,13 @@ button { font-family: inherit; cursor: pointer; }
   75% { transform: rotate(4deg) scale(1.05); }
 }
 .placeholder.small { width: 60vw; max-width: 300px; background: var(--card); }
+
+/* ---- 付き合ってからの日数 ---- */
+.status-row { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+.status-row .percent { margin-top: 0; }
+.days {
+  font-size: 13px; background: var(--card); color: var(--text);
+  padding: 4px 12px; border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(var(--shadow),.2);
+}
+.days span { font-size: 18px; font-weight: 700; color: var(--accent); margin: 0 2px; }
