@@ -53,7 +53,17 @@ GOALS.forEach((g) => {
   list.appendChild(li);
 });
 
-// 5. ユーザーアイコンでポップアップを開閉
+// 5. 真ん中の画像をタップ → 別の画像と文字のポップアップ
+const surprise = document.getElementById("surprise");
+document.getElementById("surpriseText").textContent = POPUP_TEXT;
+loadImage("surpriseImg", POPUP_IMAGE, "surprisePlaceholder");
+document.getElementById("centerImg").addEventListener("click", () => {
+  // hiddenを付け外しすると、開くたびにアニメーションが最初から再生される
+  surprise.hidden = false;
+});
+surprise.addEventListener("click", () => (surprise.hidden = true)); // どこをタップしても閉じる
+
+// 6. ユーザーアイコンでポップアップを開閉
 const modal = document.getElementById("modal");
 document.getElementById("userBtn").addEventListener("click", () => (modal.hidden = false));
 document.getElementById("closeBtn").addEventListener("click", () => (modal.hidden = true));

@@ -7,8 +7,8 @@
   <title>rena-rena</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <!-- 上部：ゲージ -->
@@ -32,7 +32,7 @@
 
   <!-- 真ん中：画像 -->
   <main class="center">
-    <img id="centerImg" alt="">
+    <img id="centerImg" alt="" role="button" aria-label="タップしてみて">
     <div id="imgPlaceholder" class="placeholder" hidden>
       <small>img/center.gif を置くと<br>ここに表示されます</small>
     </div>
@@ -55,7 +55,18 @@
     </div>
   </div>
 
-  <script src="goals.js?v=2"></script>
-  <script src="script.js?v=2"></script>
+  <!-- ポップアップ：画像をタップしたとき -->
+  <div id="surprise" class="modal" hidden>
+    <div class="surprise-box">
+      <div id="surpriseText" class="surprise-text"></div>
+      <img id="surpriseImg" alt="">
+      <div id="surprisePlaceholder" class="placeholder small" hidden>
+        <small>img/popup.gif を置くと<br>ここに表示されます</small>
+      </div>
+    </div>
+  </div>
+
+  <script src="goals.js?v=3"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

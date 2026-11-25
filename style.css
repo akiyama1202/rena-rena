@@ -1,12 +1,13 @@
 /* ===== 色はここでまとめて管理（変数） ===== */
 :root {
-  --bg: #fffaf3;        /* 背景：あたたかいクリーム */
+  --bg: #f7f3fd;        /* 背景：ごく薄いラベンダー */
   --card: #ffffff;
-  --text: #6b5a55;      /* 文字：やわらかいこげ茶 */
-  --sub: #b8a49c;
-  --accent: #f6a5a0;    /* アクセント：ほんのりコーラル */
-  --accent2: #ffd3c4;
-  --line: #f3e6dc;
+  --text: #5e5370;      /* 文字：紫がかったグレー */
+  --sub: #a99cbf;
+  --accent: #b9a3e3;    /* アクセント：薄紫 */
+  --accent2: #ddd0f5;   /* アクセント（さらに薄い紫） */
+  --line: #ece5f7;
+  --shadow: 185, 163, 227; /* 影の色（RGB） */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +32,7 @@ button { font-family: inherit; cursor: pointer; }
 .user-btn {
   width: 46px; height: 46px; border-radius: 50%;
   border: 3px solid var(--card); background: var(--accent2);
-  box-shadow: 0 3px 10px rgba(246,165,160,.35);
+  box-shadow: 0 3px 10px rgba(var(--shadow),.35);
   overflow: hidden; padding: 0;
   display: flex; align-items: center; justify-content: center;
 }
@@ -42,7 +43,7 @@ button { font-family: inherit; cursor: pointer; }
 .gauge {
   height: 26px; border-radius: 13px; background: var(--card);
   border: 3px solid var(--card);
-  box-shadow: 0 2px 8px rgba(107,90,85,.08), inset 0 0 0 1px var(--line);
+  box-shadow: 0 2px 8px rgba(94,83,112,.08), inset 0 0 0 1px var(--line);
   overflow: hidden;
 }
 .gauge-fill {
@@ -72,7 +73,7 @@ button { font-family: inherit; cursor: pointer; }
 .bottom {
   margin: 0 22px 26px; padding: 18px 16px; border-radius: 28px;
   background: var(--card); text-align: center;
-  box-shadow: 0 6px 18px rgba(246,165,160,.18);
+  box-shadow: 0 6px 18px rgba(var(--shadow),.22);
 }
 .next-label {
   display: inline-block; font-size: 12px; color: var(--card);
@@ -83,7 +84,7 @@ button { font-family: inherit; cursor: pointer; }
 /* ---- ポップアップ（画面中央） ---- */
 .modal {
   position: fixed; inset: 0; padding: 24px;
-  background: rgba(107,90,85,.35);
+  background: rgba(94,83,112,.35);
   display: flex; align-items: center; justify-content: center;
 }
 .modal[hidden] { display: none; }
@@ -109,7 +110,7 @@ button { font-family: inherit; cursor: pointer; }
 .goal-list .title { flex: 1; }
 .goal-list li.done { color: var(--sub); }
 .goal-list li.done .title { text-decoration: line-through; }
-.goal-list li.next { background: #fff3ee; border-radius: 14px; font-weight: 700; border-bottom-color: transparent; }
+.goal-list li.next { background: #f3eefc; border-radius: 14px; font-weight: 700; border-bottom-color: transparent; }
 
 /* ---- チェックボックス（コードで描画・押せない） ---- */
 .check {
@@ -127,3 +128,27 @@ button { font-family: inherit; cursor: pointer; }
   border: solid var(--card); border-width: 0 2.5px 2.5px 0;
   transform: rotate(45deg);
 }
+
+/* ---- 画像タップ時のポップアップ ---- */
+.center img { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.center img:active { transform: scale(.95); }
+.surprise-box {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  animation: pop .3s cubic-bezier(.34, 1.6, .64, 1);
+}
+.surprise-box img { max-width: 70vw; max-height: 45dvh; object-fit: contain; }
+.surprise-text {
+  font-family: "Mochiy Pop One", "Zen Maru Gothic", sans-serif;
+  font-size: 30px; color: #fff; letter-spacing: .04em; text-align: center;
+  /* 文字のまわりを薄紫でふちどり（影を8方向に重ねる） */
+  text-shadow:
+    3px 0 var(--accent), -3px 0 var(--accent), 0 3px var(--accent), 0 -3px var(--accent),
+    2px 2px var(--accent), -2px 2px var(--accent), 2px -2px var(--accent), -2px -2px var(--accent),
+    0 6px 0 rgba(94,83,112,.25);
+  animation: shake .5s ease-in-out .25s 2; /* 出てきたあとにプルプル揺れる */
+}
+@keyframes shake {
+  25% { transform: rotate(-4deg) scale(1.05); }
+  75% { transform: rotate(4deg) scale(1.05); }
+}
+.placeholder.small { width: 50vw; background: var(--card); }

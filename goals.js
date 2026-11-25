@@ -6,6 +6,8 @@ const CURRENT = 40;
 // 画像の場所（ファイル名は大文字・小文字まで一致させること）
 const CENTER_IMAGE = "img/center.gif"; // 真ん中の画像
 const ICON_IMAGE = "img/icon.png";     // 右上のアイコン（なければ標準アイコン）
+const POPUP_IMAGE = "img/popup.gif";   // 真ん中の画像をタップしたときの画像
+const POPUP_TEXT = "死んでまうわ！！";  // そのとき画像の上に出る文字
 
 // 目標一覧（percent: 何%の目標か, title: 目標の名前）
 const GOALS = [
