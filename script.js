@@ -1,4 +1,4 @@
-// goals.js の CURRENT と GOALS を使って画面を組み立てる
+// goals.js の設定を使って画面を組み立てる
 
 // 1. ゲージと%表示（少し遅らせると、伸びるアニメーションが見える）
 const percent = Math.max(0, Math.min(100, CURRENT));
@@ -13,22 +13,43 @@ document.getElementById("nextGoal").textContent = next
   ? `${next.percent}%：${next.title}`
   : "ぜんぶ達成！おめでとう🎉";
 
-// 3. 真ん中の画像：ファイルがなければ「枠」を表示
-const img = document.getElementById("centerImg");
-img.addEventListener("error", () => {
-  img.hidden = true;
-  document.getElementById("imgPlaceholder").hidden = false;
-});
+// 3. 画像を読み込み、失敗したら代わりの表示に切り替える共通処理
+function loadImage(imgId, src, fallbackId) {
+  const img = document.getElementById(imgId);
+  const fallback = document.getElementById(fallbackId);
+  img.addEventListener("error", () => {
+    img.hidden = true;
+    fallback.hidden = false;
+  });
+  img.src = src; // エラー処理を先に登録してから読み込み開始
+}
+loadImage("centerImg", CENTER_IMAGE, "imgPlaceholder");
+loadImage("iconImg", ICON_IMAGE, "iconDefault");
 
-// 4. 目標一覧（達成済み・次・まだ、の3種類で見た目を変える）
+// 4. 目標一覧（チェックボックスは表示専用）
 const list = document.getElementById("goalList");
 GOALS.forEach((g) => {
-  const li = document.createElement("li");
   const done = g.percent <= percent;
+  const li = document.createElement("li");
   if (done) li.classList.add("done");
   if (next && g.percent === next.percent) li.classList.add("next");
-  li.innerHTML = `<span class="pct">${g.percent}%</span><span class="title"></span><span class="mark">${done ? "✅" : ""}</span>`;
-  li.querySelector(".title").textContent = g.title; // 文字はtextContentで安全に入れる
+
+  const check = document.createElement("input");
+  check.type = "checkbox";
+  check.className = "check";
+  check.checked = done;
+  check.disabled = true; // 押せないようにする
+  check.tabIndex = -1;   // キーボード操作でも選ばれないようにする
+
+  const pct = document.createElement("span");
+  pct.className = "pct";
+  pct.textContent = g.percent + "%";
+
+  const title = document.createElement("span");
+  title.className = "title";
+  title.textContent = g.title;
+
+  li.append(check, pct, title);
   list.appendChild(li);
 });
 

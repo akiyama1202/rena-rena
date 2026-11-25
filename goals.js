@@ -1,7 +1,11 @@
 // ===== ここだけ書き換えればOK =====
 
 // 今どこまで達成したか（%）
-const CURRENT = 30;
+const CURRENT = 40;
+
+// 画像の場所（ファイル名は大文字・小文字まで一致させること）
+const CENTER_IMAGE = "img/center.gif"; // 真ん中の画像
+const ICON_IMAGE = "img/icon.png";     // 右上のアイコン（なければ標準アイコン）
 
 // 目標一覧（percent: 何%の目標か, title: 目標の名前）
 const GOALS = [
